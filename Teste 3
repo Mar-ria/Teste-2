@@ -1,0 +1,47 @@
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+public class Inventario {
+    // Inventário inicial
+    private static Map<String, Integer> inventario = new HashMap<>();
+
+    static {
+        inventario.put("espada", 1);
+        inventario.put("escudo", 1);
+        inventario.put("poção de cura", 6);
+        inventario.put("poção de mana", 4);
+        inventario.put("pergaminho", 3);
+    }
+
+    // Função para verificar disponibilidade
+    public static String verificarDisponibilidade(String item, int quantidade) {
+        if (inventario.containsKey(item) && inventario.get(item) >= quantidade) {
+            return "Disponível";
+        } else {
+            return "Indisponível";
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Entrada do usuário
+        System.out.println("Digite o nome do item:");
+        String item = scanner.nextLine();
+
+        System.out.println("Digite a quantidade desejada:");
+        int quantidade = scanner.nextInt();
+
+        // Verificar disponibilidade e imprimir resultado
+        String resultado = verificarDisponibilidade(item, quantidade);
+        System.out.println(resultado);
+
+        // Exemplos de teste adicionais
+        System.out.println(verificarDisponibilidade("poção de cura", 4));  // Esperado: Disponível
+        System.out.println(verificarDisponibilidade("pergaminho", 5));     // Esperado: Indisponível
+        System.out.println(verificarDisponibilidade("escudo", 1));         // Esperado: Disponível
+
+        scanner.close();
+    }
+}
